@@ -13,3 +13,10 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="sass">
+  .fullHeightViewport
+    height: 100vh
+  .fullHeight
+    height: 100%
+</style>
