@@ -6,7 +6,8 @@
           <d-card class="card-small">
 
             <d-card-header class="border-bottom">
-              <h6 class="m-0">Form Example</h6>
+              <span class="lead m-0">Backoffice</span>
+              <h5 class="m-0">Generacion Solar</h5>
             </d-card-header>
 
             <d-list-group flush>
@@ -22,7 +23,7 @@
                         <label for="fePassword">Password</label>
                         <d-input-group seamless>
                           <d-input id="fePassword" :type="hidePassword ? 'password' : 'text'" placeholder="Password" v-model="password" />
-                          <d-input-group-text slot="append">
+                          <d-input-group-text slot="append" class="btn">
                             <i class="material-icons" @click="hidePassword = !hidePassword" v-text="hidePassword ? 'visibility' : 'visibility_off'"></i>
                           </d-input-group-text>
                         </d-input-group>

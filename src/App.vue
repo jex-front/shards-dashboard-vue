@@ -14,7 +14,7 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
   .fullHeightViewport
     height: 100vh
   .fullHeight

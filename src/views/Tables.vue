@@ -1,10 +1,10 @@
 <template>
-  <div class="main-content-container container-fluid px-4">
+  <div class="main-content-container container-fluid px-4 fullHeight">
     <!-- Page Header -->
     <div class="page-header row no-gutters py-4">
       <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-        <span class="text-uppercase page-subtitle">Firebase - Cloud Firestore</span>
-        <h3 class="page-title">Leads Example</h3>
+        <span class="text-uppercase page-subtitle">Formulario Landing</span>
+        <h3 class="page-title">Contactos</h3>
       </div>
     </div>
 
@@ -13,9 +13,9 @@
       <div class="col">
         <div class="card card-small mb-4">
           <div class="card-header border-bottom">
-            <h6 class="m-0">Active Users</h6>
+            <h6 class="m-0">Datos de contacto</h6>
           </div>
-          <div class="card-body p-0 pb-3 text-center">
+          <div class="card-body p-0 pb-3">
             <table class="table mb-0">
               <thead class="bg-light">
                 <tr>
@@ -56,9 +56,9 @@ export default {
       leads: [],
     };
   },
-  created() {
-    console.log(this.leads);
-  },
+  // created() {
+  //   console.log(this.leads);
+  // },
   firestore: {
     leads: db.collection('leads'),
   },
