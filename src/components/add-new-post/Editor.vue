@@ -1,12 +1,5 @@
 <template>
-  <d-card class="card-small mb-3">
-    <d-card-body>
-      <d-form class="add-new-post">
-        <d-input size="lg" class="mb-3" placeholder="Your Post Title" />
-        <div ref="editor" class="add-new-post__editor mb-1"></div>
-      </d-form>
-    </d-card-body>
-  </d-card>
+  <div ref="editor" class="add-new-post__editor mb-1"></div>
 </template>
 
 <script>
@@ -14,6 +7,17 @@ import Quill from 'quill';
 
 export default {
   name: 'editor',
+  props: {
+    value: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {
+      editor: null,
+    };
+  },
   mounted() {
     const toolbarOptions = [
       [{ header: [1, 2, 3, 4, 5, false] }],
@@ -26,14 +30,22 @@ export default {
     ];
 
     // Init the Quill RTE
-    new Quill(this.$refs.editor, {
+    this.editor = new Quill(this.$refs.editor, {
       modules: {
         toolbar: toolbarOptions,
       },
       placeholder: 'Words can be like x-rays if you use them properly...',
       theme: 'snow',
     });
+
+    this.editor.root.innerHTML = this.value;
+
+    this.editor.on('text-change', () => this.update());
+  },
+  methods: {
+    update() {
+      this.$emit('update', this.editor.getText() ? this.editor.root.innerHTML : '');
+    },
   },
 };
 </script>
-

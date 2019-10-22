@@ -18,7 +18,7 @@
             <i class="material-icons">save</i> Save Draft
           </d-button>
 
-          <d-button size="sm" class="btn-accent ml-auto">
+          <d-button size="sm" class="btn-accent ml-auto" @click="publish">
             <i class="material-icons">file_copy</i> Publish
           </d-button>
         </d-list-group-item>
@@ -37,6 +37,11 @@ export default {
     title: {
       type: String,
       default: 'Actions',
+    },
+  },
+  methods: {
+    publish() {
+      this.$emit('publish');
     },
   },
 };
