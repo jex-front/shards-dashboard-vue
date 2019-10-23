@@ -15,7 +15,7 @@
           <div class="card-header border-bottom">
             <h6 class="m-0">Datos de contacto</h6>
           </div>
-          <div class="card-body p-0 pb-3">
+          <div class="card-body p-0 pb-3 w-100 overflow-auto">
             <table class="table mb-0">
               <thead class="bg-light">
                 <tr>

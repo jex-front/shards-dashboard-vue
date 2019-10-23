@@ -1,5 +1,6 @@
-import firebase from 'firebase/app';
+import * as firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyD92-FoFxq_WVtrjcS6wdKXlqMm85WhrPY',
@@ -17,11 +18,3 @@ if (!firebase.apps.length) {
 
 // Get a Firestore instance
 export const db = firebase.firestore();
-
-export const storage = firebase.storage();
-
-
-// Export types that exists in Firestore
-// This is not always necessary, but it's used in other examples
-const { TimeStamp, GeoPoint } = firebase.firestore;
-export { TimeStamp, GeoPoint };

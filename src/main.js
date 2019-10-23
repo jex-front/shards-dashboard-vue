@@ -16,7 +16,8 @@ import Default from '@/layouts/Default.vue';
 
 // Firebase
 import { firestorePlugin } from 'vuefire';
-import firebase from 'firebase';
+import * as firebase from "firebase/app";
+import "firebase/auth";
 
 ShardsVue.install(Vue);
 
