@@ -12,11 +12,12 @@
     <div class="row">
       <div class="col">
         <div class="card card-small mb-4">
-          <div class="card-header border-bottom">
-            <h6 class="m-0">Datos de contacto</h6>
+          <div class="card-header border-bottom d-flex justify-content-between">
+            <h6 class="m-0">Dato de contacto</h6>
+            <button class="btn btn-primary" id="customXLSButton">Exportar</button>
           </div>
           <div class="card-body p-0 pb-3 w-100 overflow-auto">
-            <table class="table mb-0">
+            <table class="table mb-0" id="table">
               <thead class="bg-light">
                 <tr>
                   <!-- <th scope="col" class="border-bottom-0">#</th> -->
@@ -49,6 +50,7 @@
 
 <script>
 import { db } from '../services/firebase';
+import { TableExport } from 'tableexport';
 
 export default {
   data() {
@@ -61,6 +63,25 @@ export default {
   // },
   firestore: {
     leads: db.collection('leads'),
+  },
+  mounted() {
+    const table = document.getElementsByTagName('table');
+
+    const instance = new TableExport(table, {
+      formats: ['xls'],
+      exportButtons: false,
+    });
+
+    /*  eslint-disable  */
+    const exportData = instance.getExportData()['table']['xls'];
+    /*  eslint-enable */
+
+    const XLSbutton = document.getElementById('customXLSButton');
+
+    XLSbutton.addEventListener('click', () => {
+      //                   // data          // mime              // name              // extension
+      instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
+    });
   },
 };
 </script>
