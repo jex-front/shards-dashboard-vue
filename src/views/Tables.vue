@@ -13,7 +13,7 @@
       <div class="col">
         <div class="card card-small mb-4">
           <div class="card-header border-bottom d-flex justify-content-between">
-            <h6 class="m-0">Active Users</h6>
+            <h6 class="m-0">Active users</h6>
             <button class="btn btn-primary" id="customXLSButton">Export</button>
           </div>
           <div class="card-body p-0 pb-3 text-center">
@@ -71,27 +71,44 @@
 </template>
 
 <script>
+import { db } from '../services/firebase';
 import { TableExport } from 'tableexport';
 
+const collectionLeads = db.collection('leads');
+
 export default {
-  mounted() {
-    const table = document.getElementsByTagName('table');
-
-    const instance = new TableExport(table, {
-      formats: ['xls'],
-      exportButtons: false,
+  data() {
+    return {
+      leads: [],
+    };
+  },
+  // created() {
+  //   console.log(this.leads);
+  // },
+  firestore: {
+    leads: collectionLeads,
+  },
+  created() {
+    collectionLeads.get().then(() => {
+      this.exportFunction();
     });
-
-    /*  eslint-disable  */
-    const exportData = instance.getExportData()['table']['xls'];
-    /*  eslint-enable */
-
-    const XLSbutton = document.getElementById('customXLSButton');
-
-    XLSbutton.addEventListener('click', () => {
-      //                   // data          // mime              // name              // extension
-      instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
-    });
+  },
+  methods: {
+    exportFunction() {
+      const table = document.getElementsByTagName('table');
+      const instance = new TableExport(table, {
+        formats: ['xls'],
+        exportButtons: false,
+      });
+      /*  eslint-disable  */
+      const exportData = instance.getExportData()['table']['xls'];
+      /*  eslint-enable */
+      const XLSbutton = document.getElementById('customXLSButton');
+      XLSbutton.addEventListener('click', () => {
+        //                   // data          // mime              // name              // extension
+        instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
+      });
+    },
   },
 };
 </script>
