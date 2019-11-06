@@ -52,6 +52,8 @@
 import { db } from '../services/firebase';
 import { TableExport } from 'tableexport';
 
+const collectionLeads = db.collection('leads');
+
 export default {
   data() {
     return {
@@ -62,26 +64,33 @@ export default {
   //   console.log(this.leads);
   // },
   firestore: {
-    leads: db.collection('leads'),
+    leads: collectionLeads,
   },
-  mounted() {
-    const table = document.getElementsByTagName('table');
-
-    const instance = new TableExport(table, {
-      formats: ['xls'],
-      exportButtons: false,
+  created() {
+    collectionLeads.get().then(() => {
+      this.exportFunction();
     });
+  },
+  methods: {
+    exportFunction() {
+      const table = document.getElementsByTagName('table');
 
-    /*  eslint-disable  */
-    const exportData = instance.getExportData()['table']['xls'];
-    /*  eslint-enable */
+      const instance = new TableExport(table, {
+        formats: ['xls'],
+        exportButtons: false,
+      });
 
-    const XLSbutton = document.getElementById('customXLSButton');
+      /*  eslint-disable  */
+      const exportData = instance.getExportData()['table']['xls'];
+      /*  eslint-enable */
 
-    XLSbutton.addEventListener('click', () => {
-      //                   // data          // mime              // name              // extension
-      instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
-    });
+      const XLSbutton = document.getElementById('customXLSButton');
+
+      XLSbutton.addEventListener('click', () => {
+        //                   // data          // mime              // name              // extension
+        instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
+      });
+    },
   },
 };
 </script>
